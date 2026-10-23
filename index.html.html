@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bônus Especial | Eneagrama das Personalidades</title>
+<style>
+:root{--ink:#292722;--muted:#6e6a61;--paper:#fbf9f5;--white:#fff;--gold:#9b7847;--gold2:#71552f;--line:#e6dfd4;--soft:#f2ece2}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 Arial,Helvetica,sans-serif}
+main{max-width:900px;margin:auto;padding:24px 16px 56px}.hero{background:linear-gradient(135deg,#282720,#61503a);color:white;border-radius:22px;padding:42px 32px;margin-bottom:18px}.eyebrow{text-transform:uppercase;letter-spacing:2px;font-size:12px;color:#e7d6bb}.hero h1{font-size:clamp(32px,5vw,48px);line-height:1.08;margin:12px 0}.hero p{font-size:18px;color:#f2ece2;max-width:650px}.panel{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:26px;margin:16px 0}.panel h2{margin:0 0 12px;font-size:26px}.muted,.small{color:var(--muted)}.small{font-size:13px}.notice{background:var(--soft);padding:15px 17px;border-left:4px solid var(--gold);border-radius:8px}.question{padding:20px 0;border-bottom:1px solid var(--line)}.question:last-child{border:0}.qtitle{font-weight:700;margin-bottom:12px}.choices{display:grid;gap:8px}.choice{display:flex;gap:10px;align-items:flex-start;padding:11px 13px;border:1px solid var(--line);border-radius:10px;cursor:pointer}.choice:hover{border-color:var(--gold)}input{accent-color:var(--gold);margin-top:5px}.btn{display:inline-block;background:var(--gold2);color:#fff;border:0;border-radius:10px;padding:13px 20px;font-weight:700;font-size:16px;cursor:pointer}.btn.secondary{background:#eee7dc;color:var(--ink)}.actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:20px}.progress{height:7px;background:#e8e1d7;border-radius:20px;overflow:hidden;margin:12px 0}.progress div{height:100%;width:0;background:var(--gold);transition:width .2s}.hidden{display:none}.err{color:#a12f26;font-weight:700}.resulthead{text-align:center;padding:16px 0}.type-num{font-size:50px;font-weight:800;color:var(--gold2);line-height:1}.type-name{font-size:27px;font-weight:700;margin:8px}.score{margin:13px 0}.scoretop{display:flex;justify-content:space-between;gap:12px;font-size:14px}.bar{height:8px;background:#e9e3da;border-radius:10px;overflow:hidden;margin-top:5px}.bar span{height:100%;display:block;background:var(--gold)}.type-card{padding:15px 0;border-bottom:1px solid var(--line)}.type-card:last-child{border:0}.commercial{background:#2c2a24;color:white}.commercial h2{color:white}.commercial p{color:#eee8df}.commercial .notice{background:#464034;color:white;border-color:#c4a36e}.footer{text-align:center;color:var(--muted);font-size:12px;padding:14px}@media(max-width:600px){.hero{padding:30px 22px}.panel{padding:21px 17px}}
+@media print{body{background:white}.hero,.commercial{print-color-adjust:exact;-webkit-print-color-adjust:exact}.btn,.progress{display:none}}
+.idfields{display:grid;gap:12px;margin:8px 0 6px}.idfields label{font-weight:700;display:grid;gap:5px}.idfields input[type=text],.idfields input[type=email]{width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:10px;font:16px Arial,Helvetica,sans-serif;margin:0}.sendmsg{margin-top:14px;font-size:14px;color:var(--muted);text-align:center}</style>
+</head>
+<body><main>
+<section class="hero">
+<div class="eyebrow">Bônus especial • Eneagrama das Personalidades</div>
+<h1>Mapa de Autopercepção</h1>
+<p>Você conhece suas atitudes. Mas já parou para observar o que motiva suas escolhas e suas reações?</p>
+</section>
+<section class="panel">
+<h2>Uma pausa para olhar para si</h2>
+<p>Este material foi criado para ajudar você a observar tendências de comportamento, motivações e reações diante dos desafios. Não existe resposta certa ou errada: responda com sinceridade, pensando em como você costuma agir — não em como gostaria de agir.</p>
+<div class="notice"><strong>Importante:</strong> este questionário é uma ferramenta introdutória de reflexão, não um teste psicológico validado nem um diagnóstico. O resultado é indicativo e não determina sua personalidade.</div>
+</section>
+<section class="panel" id="quizPanel">
+<h2>Parte 1 — Suas respostas</h2>
+<p class="muted">Para cada afirmação, escolha o quanto ela combina com você. São 27 afirmações rápidas.</p>
+<div class="progress"><div id="progressBar"></div></div><p class="small" id="progressText">0 de 27 respondidas</p>
+<form id="quiz"><div class="idfields"><label>Seu nome<input type="text" name="nome" id="nome" required autocomplete="name"></label><label>Seu e-mail<input type="email" name="email" id="email" required autocomplete="email"></label></div><div id="questions"></div><p class="err" id="error" role="alert"></p><div class="actions"><button class="btn" type="submit">Calcular meu resultado</button></div></form>
+</section>
+<section class="panel hidden" id="result" aria-live="polite"></section>
+<section class="panel">
+<h2>Parte 2 — Conheça os 9 tipos</h2>
+<p class="muted">As descrições abaixo resumem tendências gerais. Uma pessoa pode se reconhecer em vários tipos; no Eneagrama, a motivação por trás do comportamento é tão importante quanto a atitude observável.</p>
+<div id="types"></div>
+</section>
+<section class="panel">
+<h2>Parte 3 — Leve a reflexão para a prática</h2>
+<div class="notice"><strong>Reflita:</strong> qual reação sua aparece com tanta frequência que já parece automática? O que ela tenta proteger — e que nova escolha você poderia experimentar?</div>
+<p>Autoconhecimento não é rotular-se. É perceber seus padrões com mais clareza e ampliar suas possibilidades de escolha.</p>
+</section>
+<section class="panel commercial">
+<div class="eyebrow">Próximo passo</div>
+<h2>Conhecer seus padrões é o começo. Desenvolvê-los é o caminho.</h2>
+<p>O Eneagrama pode ser aprofundado em um processo estruturado de autoconhecimento, com reflexão sobre motivações, padrões emocionais, comunicação e relações.</p>
+<p>Na experiência <strong>Eneagrama das Personalidades</strong>, conduzida por Alfredo Saidneuy, o convite é ir além da descrição superficial e explorar como o autoconhecimento pode apoiar o desenvolvimento pessoal e as relações do dia a dia.</p>
+<div class="notice"><strong>Quer conhecer a próxima experiência?</strong><br>Entre em contato com o Instituto Professor Alfredo Saidneuy para receber informações sobre conteúdo, formato e próximas turmas.</div>
+<div class="actions"><button class="btn" onclick="window.print()">Imprimir / salvar em PDF</button><button class="btn secondary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Refazer a reflexão</button></div>
+<p class="small">Personalize esta página com o contato oficial do Instituto antes de divulgar, se desejar incluir WhatsApp, e-mail ou link de inscrição.</p>
+</section>
+<div class="footer">Instituto Professor Alfredo Saidneuy • Material introdutório de autoconhecimento</div>
+</main>
+<script>
+const types={
+1:{name:"O Reformador",short:"Princípios, melhoria e responsabilidade",desc:"Busca fazer o que considera correto e melhorar o que está ao redor. Pode ter padrões elevados e perceber rapidamente falhas ou incoerências.",pressure:"Pode ficar mais crítico, rígido ou frustrado com erros.",growth:"Praticar flexibilidade, reconhecer avanços e aceitar que nem tudo precisa ser perfeito."},
+2:{name:"O Prestativo",short:"Conexão, cuidado e contribuição",desc:"Valoriza vínculos e percebe com facilidade as necessidades das pessoas. Sente satisfação ao contribuir e ser útil.",pressure:"Pode assumir responsabilidades demais ou deixar suas próprias necessidades em segundo plano.",growth:"Aprender a pedir, receber e estabelecer limites sem sentir que está falhando com os outros."},
+3:{name:"O Realizador",short:"Objetivos, eficiência e realização",desc:"É orientado a metas e resultados. Costuma mobilizar energia para avançar, adaptar-se e entregar.",pressure:"Pode se definir excessivamente pelo desempenho ou esconder dificuldades para manter uma imagem de competência.",growth:"Reconhecer o próprio valor para além das conquistas e equilibrar resultado com autenticidade."},
+4:{name:"O Individualista",short:"Identidade, significado e profundidade",desc:"Valoriza autenticidade e significado pessoal. Costuma observar nuances emocionais e o que torna cada experiência singular.",pressure:"Pode comparar sua experiência com a dos outros ou concentrar-se no que sente que está faltando.",growth:"Acolher emoções sem deixar que elas definam toda a realidade e transformar reflexão em ação."},
+5:{name:"O Investigador",short:"Compreensão, autonomia e observação",desc:"Busca entender antes de agir e valoriza conhecimento, espaço pessoal e autonomia.",pressure:"Pode se afastar, racionalizar sentimentos ou esperar saber tudo antes de se envolver.",growth:"Equilibrar análise com experiência, conexão e ação prática."},
+6:{name:"O Leal",short:"Segurança, confiança e preparação",desc:"Tende a antecipar riscos, avaliar cenários e valorizar relações e estruturas confiáveis.",pressure:"Pode entrar em dúvida, preocupação ou buscar garantias excessivas antes de decidir.",growth:"Distinguir riscos concretos de hipóteses e fortalecer a confiança na própria capacidade de responder."},
+7:{name:"O Entusiasta",short:"Possibilidades, energia e liberdade",desc:"Enxerga alternativas, gosta de explorar possibilidades e procura experiências estimulantes.",pressure:"Pode se dispersar ou evitar situações desconfortáveis buscando rapidamente outra opção.",growth:"Sustentar o foco e aprender a permanecer presente mesmo quando a experiência exige paciência."},
+8:{name:"O Desafiador",short:"Autonomia, firmeza e proteção",desc:"Valoriza independência, franqueza e justiça. Tende a se posicionar e agir diante do que considera importante.",pressure:"Pode aumentar a intensidade, assumir o controle ou soar confrontador.",growth:"Combinar firmeza com escuta, reconhecer vulnerabilidades e dividir o espaço de decisão."},
+9:{name:"O Pacificador",short:"Harmonia, estabilidade e compreensão",desc:"Valoriza tranquilidade e conexão. Costuma considerar diferentes pontos de vista e buscar entendimento.",pressure:"Pode evitar conversas difíceis, adiar decisões ou deixar suas prioridades para depois.",growth:"Dar voz às próprias necessidades, tomar posição e agir mesmo quando existe algum desconforto."}
+};
+const qs=[
+[1,"Sinto necessidade de corrigir o que considero errado ou malfeito."],[1,"Costumo me cobrar para agir de acordo com meus princípios."],[1,"Tenho dificuldade em relaxar quando percebo algo que poderia ser melhorado."],
+[2,"Percebo rapidamente quando alguém precisa de apoio ou atenção."],[2,"Sinto-me especialmente valorizado quando sou útil para outras pessoas."],[2,"Às vezes cuido das necessidades dos outros antes de perceber as minhas."],
+[3,"Definir objetivos e alcançar resultados me dá energia."],[3,"Reconhecimento e desempenho têm bastante peso na forma como avalio meu progresso."],[3,"Consigo adaptar minha apresentação ou abordagem para atingir uma meta."],
+[4,"Preciso sentir que minhas escolhas têm significado pessoal."],[4,"Costumo comparar minha experiência com a de outras pessoas."],[4,"Minhas emoções e minha busca por autenticidade influenciam bastante minhas escolhas."],
+[5,"Prefiro compreender bem uma situação antes de me envolver."],[5,"Preciso de tempo sozinho para organizar minhas ideias e recuperar energia."],[5,"Quando algo me desafia, busco informação antes de agir."],
+[6,"Costumo imaginar o que pode dar errado para me preparar."],[6,"Percebo com facilidade riscos e inconsistências."],[6,"Quando estou inseguro, procuro referências ou opiniões confiáveis."],
+[7,"Enxergo rapidamente novas possibilidades e alternativas."],[7,"Tenho dificuldade em permanecer em situações que considero limitantes ou monótonas."],[7,"Quando algo fica desconfortável, minha tendência é buscar uma alternativa mais estimulante."],
+[8,"Tenho facilidade para me posicionar mesmo quando existe possibilidade de confronto."],[8,"Valorizo muito minha autonomia e não gosto de me sentir controlado."],[8,"Quando percebo uma injustiça, tendo a intervir."],
+[9,"Procuro reduzir conflitos e encontrar pontos de entendimento."],[9,"Às vezes considero tanto as prioridades alheias que demoro a identificar as minhas."],[9,"Em situações tensas, tento acalmar o ambiente antes de lidar com o problema."]
+];
+const scale=[["1","Não combina comigo"],["2","Combina pouco"],["3","Combina em parte"],["4","Combina bastante"],["5","Combina muito"]];
+const qRoot=document.getElementById("questions");
+qs.forEach((q,i)=>{let d=document.createElement("div");d.className="question";d.innerHTML=`<div class="qtitle">${i+1}. ${q[1]}</div><div class="choices">${scale.map(([v,t])=>`<label class="choice"><input type="radio" name="q${i}" value="${v}"><span><strong>${v}</strong> — ${t}</span></label>`).join("")}</div>`;qRoot.appendChild(d)});
+function progress(){let n=document.querySelectorAll('input[type=radio]:checked').length;document.getElementById("progressBar").style.width=(n/qs.length*100)+"%";document.getElementById("progressText").textContent=`${n} de ${qs.length} respondidas`}
+document.addEventListener("change",progress);
+document.getElementById("quiz").addEventListener("submit",e=>{e.preventDefault();let scores={1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0},missing=[];qs.forEach((q,i)=>{let a=document.querySelector(`input[name=q${i}]:checked`);if(!a)missing.push(i+1);else scores[q[0]]+=Number(a.value)});let err=document.getElementById("error");if(missing.length){err.textContent=`Faltam ${missing.length} resposta(s). Responda a todas para visualizar seu mapa.`;document.querySelector(`input[name=q${missing[0]-1}]`).closest(".question").scrollIntoView({behavior:"smooth",block:"center"});return}err.textContent="";let ranked=Object.entries(scores).sort((a,b)=>b[1]-a[1]);let [id,score]=ranked[0],t=types[id],runner=ranked[1];let tied=ranked.filter(x=>x[1]===score).map(x=>x[0]);let scoreHTML=ranked.map(([n,s])=>`<div class="score"><div class="scoretop"><strong>Tipo ${n} — ${types[n].name}</strong><span>${s}/15</span></div><div class="bar"><span style="width:${s/15*100}%"></span></div></div>`).join("");let heading=tied.length>1?`<p>Há empate entre os tipos ${tied.join(", ")}. Considere os dois como pistas para reflexão, não como uma conclusão.</p>`:`<p>Seu maior escore neste questionário foi o Tipo ${id}. O segundo maior foi o Tipo ${runner[0]} — ${types[runner[0]].name}.</p>`;let result=document.getElementById("result");result.innerHTML=`<div class="resulthead"><div class="small">SEU MAPA INDICATIVO</div><div class="type-num">${tied.length>1?"":("0"+id).slice(-2)}</div><div class="type-name">${tied.length>1?"Dois ou mais padrões em destaque":t.name}</div><p class="muted">${t.short}</p></div>${heading}<h3>Uma tendência para observar</h3><p>${t.desc}</p><p><strong>Em momentos de pressão:</strong> ${t.pressure}</p><p><strong>Possibilidade de desenvolvimento:</strong> ${t.growth}</p><h3>Seu mapa de pontuação</h3>${scoreHTML}<div class="notice"><strong>Como interpretar:</strong> os escores mostram afinidade com as afirmações deste material, não comprovam seu tipo no Eneagrama. Para explorar seu tipo com mais profundidade, investigue suas motivações, receios recorrentes e estratégias habituais — de preferência com orientação qualificada.</div><div class="actions"><button class="btn" onclick="window.print()">Imprimir / salvar resultado em PDF</button></div>`;result.classList.remove("hidden");result.scrollIntoView({behavior:"smooth"});
+const respostas={};qs.forEach((q,i)=>{respostas["afirmacao_"+(i+1)+"_tipo"+q[0]]=document.querySelector(`input[name=q${i}]:checked`).value});
+const payload={nome:document.getElementById("nome").value.trim(),email:document.getElementById("email").value.trim(),_subject:"Novo resultado - Mapa de Autopercepção (Eneagrama)",tipo_principal:tied.length>1?("Empate entre os tipos "+tied.join(", ")):("Tipo "+id+" - "+t.name),segundo_maior:tied.length>1?"":("Tipo "+runner[0]+" - "+types[runner[0]].name)};
+Object.entries(scores).forEach(([n,sc])=>{payload["pontuacao_tipo_"+n]=sc+"/15"});
+Object.assign(payload,respostas);
+const msg=document.createElement("p");msg.className="sendmsg";msg.textContent="Enviando suas respostas...";result.appendChild(msg);
+fetch("https://formspree.io/f/mvkkplqo",{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(payload)}).then(r=>{msg.textContent=r.ok?"Suas respostas foram enviadas com sucesso. Obrigado!":"Seu resultado está acima, mas não foi possível enviar as respostas. Tente novamente mais tarde."}).catch(()=>{msg.textContent="Seu resultado está acima, mas não foi possível enviar as respostas. Verifique sua conexão."});
+});
+document.getElementById("types").innerHTML=Object.entries(types).map(([id,t])=>`<div class="type-card"><strong>Tipo ${id} — ${t.name}</strong><div class="small">${t.short}</div><p>${t.desc}</p><p><strong>Sob pressão:</strong> ${t.pressure}</p><p><strong>Para desenvolver:</strong> ${t.growth}</p></div>`).join("");
+</script></body></html>
